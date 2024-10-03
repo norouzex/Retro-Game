@@ -1,0 +1,21 @@
+/* Import Tailwind CSS inside your SCSS */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "fonts/fonts";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #222e3c;
+  color: white;
+  padding: 0 32px;
+  font-size: 16px;
+  direction: ltr;
+}
