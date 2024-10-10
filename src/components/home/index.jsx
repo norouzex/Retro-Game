@@ -7,7 +7,7 @@ export default function Home() {
     data: [
       {
         title: "biography",
-        data: "im a developer",
+        data: "A dedicated developer with a passion for creating innovative software solutions, I possess expertise in various programming languages and frameworks, including PHP, Django, and Node.js. My journey began with a strong foundation in backend development, which has evolved to encompass full-stack capabilities, particularly with React and Next.js. I am currently focused on optimizing performance and scalability in my projects, while also exploring the intricacies of building exchange platforms. Driven by curiosity, I am always eager to learn new technologies and improve my skills. Outside of coding, I enjoy engaging with the developer community and sharing knowledge through collaboration.",
       },
       {
         title: "projects",
@@ -111,6 +111,9 @@ export default function Home() {
   }
 
   const [data, setData] = useState(allData)
+  useEffect(() => {
+    console.log(data.data)
+  }, [data])
 
   const [focusOption, setFocusOption] = useState(1) // Assume your first option has id 1
 
@@ -176,6 +179,14 @@ export default function Home() {
     }
   }
 
+  const scrollOnTextContent = (value) => {
+    const scrollerElement = document.getElementById("scroller-screen")
+    scrollerElement.scroll({
+      top: scrollerElement.scrollTop + value,
+      behavior: "smooth",
+    })
+  }
+
   const selectOption = () => {
     setData(data.data[focusOption - 1])
     moveArrow("up", true)
@@ -185,9 +196,17 @@ export default function Home() {
     const handleKeyDown = (event) => {
       if (event.keyCode === 38) {
         // Up arrow
+        if (typeof data.data === "string") {
+          scrollOnTextContent(-10)
+          return
+        }
         moveArrow("up")
       } else if (event.keyCode === 40) {
         // Down arrow
+        if (typeof data.data === "string") {
+          scrollOnTextContent(+10)
+          return
+        }
         moveArrow("down")
       } else if (event.keyCode === 13) {
         // Enter  presed
@@ -206,15 +225,18 @@ export default function Home() {
   return (
     <section>
       <div className="relative h-[650px] w-[365px] m-auto">
-        <img
+        {/* <img
           src="/assets/img/console.png"
           className="h-[650px] w-[365px] absolute z-10 bg-no-repeat bg-contain"
-        />
+        /> */}
         <div
           className="absolute p-1 font-SaboRegular text-xs text-black z-0 bg-[#2b5329] w-[214px] h-[178px] left-1/2 top-[106px] -translate-x-1/2  overflow-hidden overflow-y-scroll scroll-width-none"
           id="scroller-screen"
         >
-          <div className="flex flex-row  gap-2 justify-center" id="screen">
+          <div
+            className="flex flex-row  gap-2 justify-center overflow-y-scroll"
+            id="screen"
+          >
             <div className="relative w-3  flex-shrink-0">
               <img
                 className="w-3 absolute transition-all"
