@@ -16,10 +16,10 @@ export default function List({ data, userStepNavigation }) {
               >
                 <p className="text-left">{row.title}</p>
               </li>
-              {key === data.length - 1 && userStepNavigation.length && (
+              {key === data.length - 1 && userStepNavigation.length > 0 && (
                 <li
                   className="list-none menu-items"
-                  key={key + 1}
+                  key={key + 2}
                   id={`menu-option-${key + 2}`}
                   data-tag="back-option"
                 >

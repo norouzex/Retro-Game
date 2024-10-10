@@ -184,8 +184,15 @@ export default function Home() {
   }
 
   const backSateAction = () => {
-    setUserStepNavigation((prev) => prev.slice(0, -1))
-    setData(userStepNavigation.at(-1))
+    if (userStepNavigation.length > 0) {
+      const scrollerElement = document.getElementById("scroller-screen")
+      scrollerElement.scroll({
+        top: 0,
+      })
+      setUserStepNavigation((prev) => prev.slice(0, -1))
+      setData(userStepNavigation.at(-1))
+      moveArrow("up", true)
+    }
   }
 
   const selectOption = () => {
@@ -198,30 +205,41 @@ export default function Home() {
     moveArrow("up", true)
   }
 
+  const keyUp = () => {
+    if (typeof data.data === "string") {
+      scrollOnTextContent(-10)
+      return
+    }
+    moveArrow("up")
+  }
+
+  const keyDown = () => {
+    if (typeof data.data === "string") {
+      scrollOnTextContent(+10)
+      return
+    }
+    moveArrow("down")
+  }
+
+  const keyEnter = () => {
+    if (typeof data.data !== "string") {
+      selectOption()
+    } else {
+      backSateAction()
+      moveArrow("up", true)
+    }
+  }
+
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.keyCode === 38) {
         // Up arrow
-        if (typeof data.data === "string") {
-          scrollOnTextContent(-10)
-          return
-        }
-        moveArrow("up")
+        keyUp()
       } else if (event.keyCode === 40) {
-        // Down arrow
-        if (typeof data.data === "string") {
-          scrollOnTextContent(+10)
-          return
-        }
-        moveArrow("down")
+        keyDown()
       } else if (event.keyCode === 13) {
         // Enter  presed
-        if (typeof data.data !== "string") {
-          selectOption()
-        } else {
-          backSateAction()
-          moveArrow("up", true)
-        }
+        keyEnter()
       }
     }
 
@@ -236,10 +254,17 @@ export default function Home() {
   return (
     <section>
       <div className="relative h-[650px] w-[365px] m-auto">
-        {/* <img
+        <img
           src="/assets/img/console.png"
           className="h-[650px] w-[365px] absolute z-10 bg-no-repeat bg-contain"
-        /> */}
+        />
+        <div className="dpad">
+          <div className="dpad-up main-btn" onClick={keyUp}></div>
+          <div className="dpad-down main-btn" onClick={keyDown}></div>
+          <div className="dpad-left main-btn" onClick={backSateAction}></div>
+          <div className="dpad-right main-btn" onClick={keyEnter}></div>
+          <div className="dpad-center"></div>
+        </div>
         <div
           className="absolute p-1 font-SaboRegular text-xs text-black z-0 bg-[#2b5329] w-[214px] h-[178px] left-1/2 top-[106px] -translate-x-1/2  overflow-hidden overflow-y-scroll scroll-width-none"
           id="scroller-screen"

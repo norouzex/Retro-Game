@@ -30,3 +30,77 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.dpad {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 165px; /* Adjust position to fit your layout */
+  left: 35px; /* Adjust position to fit your layout */
+  z-index: 11;
+}
+
+.dpad .main-btn {
+  position: absolute;
+  background: #233c42; /* Dark color for the D-pad */
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5),
+    -3px -3px 6px rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  transition: transform 0.1s ease-in-out;
+  background-image: url("/public/assets/img/btn-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Up Button */
+.dpad-up {
+  top: 5px;
+  width: 36px;
+  height: 50px;
+  border-radius: 10px 10px 0 0;
+}
+
+/* Down Button */
+.dpad-down {
+  bottom: 5px;
+  width: 36px;
+  height: 50px;
+  border-radius: 0 0 10px 10px;
+}
+
+/* Left Button */
+.dpad-left {
+  left: 5px;
+  width: 50px;
+  height: 32px;
+  border-radius: 10px 0 0 10px;
+}
+
+/* Right Button */
+.dpad-right {
+  right: 5px;
+  width: 50px;
+  height: 32px;
+  border-radius: 0 10px 10px 0;
+}
+.dpad-center {
+  width: 40px;
+  height: 40px;
+  background: #000 !important;
+  border-radius: 100% !important;
+  position: absolute;
+  background: #233c42; /* Dark color for the D-pad */
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5),
+    -3px -3px 6px rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  background-image: url("/public/assets/img/center-btn.png") !important;
+}
+
+/* 3D Press effect for when the buttons are clicked */
+.dpad .main-btn:active {
+  transform: translateY(3px); /* Simulates pressing down */
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
