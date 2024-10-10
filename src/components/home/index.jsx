@@ -111,13 +111,9 @@ export default function Home() {
   }
 
   const [data, setData] = useState(allData)
-  useEffect(() => {
-    console.log(data.data)
-  }, [data])
-
+  const [userStepNavigation, setUserStepNavigation] = useState([])
   const [focusOption, setFocusOption] = useState(1) // Assume your first option has id 1
-
-  const totalOptions = data.data.length // Total number of menu options (replace with your actual total)
+  const totalOptions = data.data.length + 1
 
   const getTargetList = (currentKeyPress) => {
     let newFocusOption = focusOption
@@ -187,8 +183,18 @@ export default function Home() {
     })
   }
 
+  const backSateAction = () => {
+    setUserStepNavigation((prev) => prev.slice(0, -1))
+    setData(userStepNavigation.at(-1))
+  }
+
   const selectOption = () => {
-    setData(data.data[focusOption - 1])
+    if (focusOption === data.data.length + 1) {
+      backSateAction()
+    } else {
+      setUserStepNavigation((prev) => [...prev, data])
+      setData(data.data[focusOption - 1])
+    }
     moveArrow("up", true)
   }
 
@@ -210,7 +216,12 @@ export default function Home() {
         moveArrow("down")
       } else if (event.keyCode === 13) {
         // Enter  presed
-        selectOption()
+        if (typeof data.data !== "string") {
+          selectOption()
+        } else {
+          backSateAction()
+          moveArrow("up", true)
+        }
       }
     }
 
@@ -220,7 +231,7 @@ export default function Home() {
     return () => {
       document.removeEventListener("keydown", handleKeyDown)
     }
-  }, [focusOption]) // No need to track lastArrowKey here
+  }, [focusOption, data, userStepNavigation]) // No need to track lastArrowKey here
 
   return (
     <section>
@@ -245,7 +256,7 @@ export default function Home() {
               />
             </div>
 
-            <List data={data.data} />
+            <List data={data.data} userStepNavigation={userStepNavigation} />
           </div>
         </div>
       </div>

@@ -24,5 +24,5 @@ export default function CharByCharText({ text, speed }) {
     return () => clearInterval(intervalId)
   }, [text, speed])
 
-  return <p className="text-left">{displayedText}</p>
+  return <li className="text-left">{displayedText}</li>
 }
