@@ -339,7 +339,7 @@ export default function Home() {
             <div className="relative w-3  flex-shrink-0">
               <img
                 className="w-3 absolute transition-all"
-                src="/public/assets/img/greater.svg"
+                src="/assets/img/greater.svg"
                 id="arrow"
               />
             </div>
@@ -350,7 +350,7 @@ export default function Home() {
         </div>
         <img
           className="w-3 absolute transition-all right-[82px] top-[110px]"
-          src={`/public/assets/img/${isSilent ? "silent" : "unsilent"}.svg`}
+          src={`/assets/img/${isSilent ? "silent" : "unsilent"}.svg`}
           id="arrow"
         />
       </div>
