@@ -6,23 +6,42 @@ export default function Home() {
     title: "menu",
     data: [
       {
+        type: "text",
         title: "biography",
-        data: "A dedicated developer with a passion for creating innovative software solutions, I possess expertise in various programming languages and frameworks, including PHP, Django, and Node.js. My journey began with a strong foundation in backend development, which has evolved to encompass full-stack capabilities, particularly with React and Next.js. I am currently focused on optimizing performance and scalability in my projects, while also exploring the intricacies of building exchange platforms. Driven by curiosity, I am always eager to learn new technologies and improve my skills. Outside of coding, I enjoy engaging with the developer community and sharing knowledge through collaboration.",
+        data: "I have been programming for 4 years, specializing in backend development for 3 years with Django and PHP. Since February 2023, I have expanded my skill set to include React, where I continue to develop web applications using modern frontend technologies.",
       },
       {
         title: "projects",
         data: [
           {
-            title: "nothing",
-            data: "im a developer",
+            type: "link",
+            title: "Trading-View",
+            data: "https://github.com/norouzex/Trading-View",
           },
           {
-            title: "nothing",
-            data: "im a developer",
+            type: "link",
+            title: "flappy-bird",
+            data: "https://github.com/norouzex/flappy-bird",
           },
           {
-            title: "nothing",
-            data: "im a developer",
+            type: "link",
+            title: "CafeBazaar-Apk-Downloader",
+            data: "https://github.com/norouzex/CafeBazaar-Apk-Downloader",
+          },
+          {
+            type: "link",
+            title: "multi-telegram-bot-manager",
+            data: "https://github.com/norouzex/multi-telegram-bot-manager",
+          },
+          {
+            type: "link",
+            title: "food-order",
+            data: "https://github.com/norouzex/food-order",
+          },
+          {
+            type: "link",
+            title: "backup-path",
+            data: "https://github.com/norouzex/backup-path",
           },
         ],
       },
@@ -30,90 +49,45 @@ export default function Home() {
         title: "socials",
         data: [
           {
-            title: "my instagram",
-            data: "im a developer",
+            type: "link",
+            title: "github",
+            data: "https://github.com/norouzex",
           },
           {
-            title: "my instagram",
-            data: "im a developer",
+            type: "link",
+            title: "linkedin",
+            data: "https://www.linkedin.com/in/norouzy/",
           },
           {
-            title: "my instagram",
-            data: "im a developer",
+            type: "link",
+            title: "telegram",
+            data: "http://t.me/n0rouzy",
+          },
+          {
+            type: "link",
+            title: "instagram",
+            data: "https://www.instagram.com/n0rouzy/",
+          },
+          {
+            type: "link",
+            title: "email",
+            data: "mailto:norouzymohamad@gmail.com",
           },
         ],
       },
       {
+        type: "text",
         title: "skills",
-        data: "im a developer",
-      },
-      {
-        title: "Games",
-        data: [
-          {
-            title: "flappy",
-            data: "im a developer",
-          },
-        ],
-      },
-      {
-        title: "biography biography biography",
-        data: "im a developer",
-      },
-      {
-        title: "projects",
-        data: [
-          {
-            title: "nothing",
-            data: "im a developer",
-          },
-          {
-            title: "nothing",
-            data: "im a developer",
-          },
-          {
-            title: "nothing",
-            data: "im a developer",
-          },
-        ],
-      },
-      {
-        title: "socials",
-        data: [
-          {
-            title: "my instagram",
-            data: "im a developer",
-          },
-          {
-            title: "my instagram",
-            data: "im a developer",
-          },
-          {
-            title: "my instagram",
-            data: "im a developer",
-          },
-        ],
-      },
-      {
-        title: "skills",
-        data: "im a developer",
-      },
-      {
-        title: "Games",
-        data: [
-          {
-            title: "flappy",
-            data: "im a developer",
-          },
-        ],
+        data: "Html-css ,React.js ,JavaScript ,Python ,Django ,DRF ,Php ,Mysql ,Web Scraping ,Rest-Api ,Gsap ,NextJs ,TypeScript ,Tailwind ,React Hooks ,Redux ,Git ,Redis ,WebSocket ,Linux ,Postman",
       },
     ],
   }
 
   const [data, setData] = useState(allData)
   const [userStepNavigation, setUserStepNavigation] = useState([])
-  const [focusOption, setFocusOption] = useState(1) // Assume your first option has id 1
+  const [focusOption, setFocusOption] = useState(1)
   const totalOptions = data.data.length + 1
+  const [isSilent, setIsSilent] = useState(false)
 
   const getTargetList = (currentKeyPress) => {
     let newFocusOption = focusOption
@@ -127,6 +101,31 @@ export default function Home() {
     setFocusOption(newFocusOption)
 
     return `menu-option-${newFocusOption}`
+  }
+
+  const changeLightColor = (el = "left-light") => {
+    const lightElement = document.getElementById(el)
+    lightElement.style.background = "rgb(255 0 0)"
+
+    setTimeout(() => {
+      lightElement.style.background = "#000"
+    }, 100)
+  }
+
+  const playBtnSound = (id) => {
+    if (!isSilent) {
+      const audio = new Audio("/public/assets/audio/btn.m4a")
+      audio.muted = !document.interacted // Mute audio until user interaction
+      audio
+        .play()
+        .then(() => {
+          audio.muted = false // Unmute once audio starts playing after interaction
+        })
+        .catch((error) => {
+          console.log("Audio play failed:", error)
+        })
+    }
+    changeLightColor(id)
   }
 
   const getDistanceFromParentTop = (targetList) => {
@@ -183,7 +182,8 @@ export default function Home() {
     })
   }
 
-  const backSateAction = () => {
+  const backSateAction = (id = "left-light") => {
+    playBtnSound(id)
     if (userStepNavigation.length > 0) {
       const scrollerElement = document.getElementById("scroller-screen")
       scrollerElement.scroll({
@@ -199,6 +199,10 @@ export default function Home() {
     if (focusOption === data.data.length + 1) {
       backSateAction()
     } else {
+      if (data.data[focusOption - 1].type === "link") {
+        window.open(data.data[focusOption - 1].data, "_blank")
+        return
+      }
       setUserStepNavigation((prev) => [...prev, data])
       setData(data.data[focusOption - 1])
     }
@@ -206,6 +210,7 @@ export default function Home() {
   }
 
   const keyUp = () => {
+    playBtnSound()
     if (typeof data.data === "string") {
       scrollOnTextContent(-10)
       return
@@ -214,6 +219,7 @@ export default function Home() {
   }
 
   const keyDown = () => {
+    playBtnSound()
     if (typeof data.data === "string") {
       scrollOnTextContent(+10)
       return
@@ -221,14 +227,31 @@ export default function Home() {
     moveArrow("down")
   }
 
-  const keyEnter = () => {
+  const keyEnter = (id = "left-light") => {
+    playBtnSound(id)
     if (typeof data.data !== "string") {
       selectOption()
     } else {
-      backSateAction()
-      moveArrow("up", true)
+      if (data.type !== "link") {
+        backSateAction()
+        moveArrow("up", true)
+      } else {
+        window.location.href = data.data
+      }
     }
   }
+
+  const silentKey = () => {
+    setIsSilent(!isSilent)
+  }
+
+  useEffect(() => {
+    if (!isSilent) {
+      playBtnSound()
+    } else {
+      changeLightColor()
+    }
+  }, [isSilent])
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -249,7 +272,7 @@ export default function Home() {
     return () => {
       document.removeEventListener("keydown", handleKeyDown)
     }
-  }, [focusOption, data, userStepNavigation]) // No need to track lastArrowKey here
+  }, [focusOption, data, userStepNavigation])
 
   return (
     <section>
@@ -258,11 +281,51 @@ export default function Home() {
           src="/assets/img/console.png"
           className="h-[650px] w-[365px] absolute z-10 bg-no-repeat bg-contain"
         />
+        <img
+          src="/assets/img/silent-btn.png"
+          className="absolute right-5 top-[316px] z-20 rounded-full cursor-pointer btn"
+          onClick={silentKey}
+        />
+        <img
+          src="/assets/img/enter.png"
+          className="absolute right-[40px] top-[392px] z-20 rounded-full cursor-pointer w-[45px] btn"
+          onClick={() => keyEnter("enter-light")}
+        />
+        <img
+          src="/assets/img/enter.png"
+          className="absolute right-[98px] top-[420px] z-20 rounded-full cursor-pointer w-[45px] btn"
+          id="back-btn"
+          onClick={() => backSateAction("back-light")}
+        />
+        <div
+          className="left-[27px] z-20 bottom-[162px] bg-black rounded-full h-[10px] w-[10px] absolute transition-all"
+          id="left-light"
+        ></div>
+        <div
+          className="right-[37px] z-20 bottom-[197px] bg-black rounded-full h-[10px] w-[10px] absolute transition-all"
+          id="enter-light"
+        ></div>
+        <div
+          className="right-[99px] z-20 bottom-[167px] bg-black rounded-full h-[10px] w-[10px] absolute transition-all"
+          id="back-light"
+        ></div>
         <div className="dpad">
-          <div className="dpad-up main-btn" onClick={keyUp}></div>
-          <div className="dpad-down main-btn" onClick={keyDown}></div>
-          <div className="dpad-left main-btn" onClick={backSateAction}></div>
-          <div className="dpad-right main-btn" onClick={keyEnter}></div>
+          <div
+            className="dpad-up main-btn cursor-pointer"
+            onClick={keyUp}
+          ></div>
+          <div
+            className="dpad-down main-btn cursor-pointer"
+            onClick={keyDown}
+          ></div>
+          <div
+            className="dpad-left main-btn cursor-pointer"
+            onClick={() => backSateAction()}
+          ></div>
+          <div
+            className="dpad-right main-btn cursor-pointer"
+            onClick={() => keyEnter()}
+          ></div>
           <div className="dpad-center"></div>
         </div>
         <div
@@ -282,8 +345,14 @@ export default function Home() {
             </div>
 
             <List data={data.data} userStepNavigation={userStepNavigation} />
+            <div className="relative w-3 flex-shrink-0"></div>
           </div>
         </div>
+        <img
+          className="w-3 absolute transition-all right-[82px] top-[110px]"
+          src={`/public/assets/img/${isSilent ? "silent" : "unsilent"}.svg`}
+          id="arrow"
+        />
       </div>
     </section>
   )

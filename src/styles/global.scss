@@ -13,9 +13,9 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #222e3c;
+  background-color: #000;
   color: white;
-  padding: 0 32px;
+  padding: 0;
   font-size: 16px;
   direction: ltr;
 }
@@ -99,8 +99,22 @@ body {
   background-image: url("/public/assets/img/center-btn.png") !important;
 }
 
+.silent-btn {
+  background: #000 !important;
+  border-radius: 100% !important;
+  position: absolute;
+  background: #233c42; /* Dark color for the D-pad */
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5),
+    -3px -3px 6px rgba(255, 255, 255, 0.1);
+}
+
 /* 3D Press effect for when the buttons are clicked */
 .dpad .main-btn:active {
+  transform: translateY(3px); /* Simulates pressing down */
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.btn:active {
   transform: translateY(3px); /* Simulates pressing down */
   box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
