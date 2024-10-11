@@ -114,7 +114,7 @@ export default function Home() {
 
   const playBtnSound = (id) => {
     if (!isSilent) {
-      const audio = new Audio("/public/assets/audio/btn.m4a")
+      const audio = new Audio("/assets/audio/btn.m4a")
       audio.muted = !document.interacted // Mute audio until user interaction
       audio
         .play()
