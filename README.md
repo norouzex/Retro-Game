@@ -1,8 +1,35 @@
-# React + Vite
+# Retro Portfolio GameBoy App 🎮
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A retro-styled portfolio app designed to resemble a GameBoy! This mini-app showcases my biography, projects, social links, skills, and more in a nostalgic, pixelated interface. Built with love to give a unique and fun twist to my personal portfolio.
 
-Currently, two official plugins are available:
+![image](https://github.com/user-attachments/assets/3fb2e6b1-71a7-4263-bcf6-7c73837e9170)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Features ✨
+- **Dynamic Menus**: Add as many submenus or nested inner menus as you'd like, making it easy to expand with new sections.
+- **Open Links**: Easily set up links in the app that can open external sites in a new tab or navigate to other sections within the app.
+- **Sound Control**: Adjustable sound slider to control button and menu sounds for a more immersive experience.
+
+## Demo 🚀
+
+[Live Demo](https://norouzy.ir) <!-- Link to the hosted app, if available -->
+
+## Getting Started 🛠️
+
+Follow these steps to run the project locally.
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone git@github.com:norouzex/Retro-Game.git
+   cd Retro-Game
+
+2. **Install dependencies::**
+   ```bash
+   npm install
+   
+3. **Start the development server**:
+      ```bash
+      npm run dev
+
