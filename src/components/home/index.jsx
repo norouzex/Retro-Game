@@ -361,7 +361,7 @@ export default function Home() {
               href="https://github.com/norouzex/Retro-Game"
               target="_blank"
             >
-              Noruzex
+              Norouzex
             </a>
           </p>
         </div>
